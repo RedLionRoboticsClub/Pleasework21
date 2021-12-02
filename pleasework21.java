@@ -8,6 +8,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.internal.camera.delegating.DelegatingCaptureSequence;
+
 
 /**
  * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
@@ -68,28 +70,19 @@ public class pleasework21 extends LinearOpMode {
 
             double radR = Math.sqrt(Math.pow(xRValue, 2) + Math.pow(yRValue, 2));
 
-            loop();
-            {
-                if (gamepad1.left_bumper && !changed) {
-                    if (motorPower == 1) {
-                        while (gamepad1.b) {
-                            motorPower = .1;
-                        }
-                    }
-                }
-            }
+
             loop();
             {
 
                 if (gamepad1.left_stick_y > 0) {
 
-                    robot.motorBR.setPower(-motorPower);
+                    robot.motorBR.setPower((-0.5)*motorPower);
 
 
                 }
                 if (gamepad1.left_stick_y < 0) {
 
-                    robot.motorBR.setPower(motorPower);
+                    robot.motorBR.setPower(0.5*motorPower);
 
 
                 } else {
@@ -103,13 +96,13 @@ public class pleasework21 extends LinearOpMode {
             {
                 if (gamepad1.right_stick_y > 0) {
 
-                    robot.motorBL.setPower(-motorPower);
+                    robot.motorBL.setPower((-0.5)*motorPower);
 
 
                 }
                 if (gamepad1.right_stick_y < 0) {
 
-                    robot.motorBL.setPower(motorPower);
+                    robot.motorBL.setPower(0.5*motorPower);
 
 
                 } else {
@@ -117,6 +110,14 @@ public class pleasework21 extends LinearOpMode {
                     robot.motorBL.setPower(0);
                 }
 
+            }
+            loop();
+            {
+               if (gamepad1.b && !changed) {
+                   while (gamepad1.b) {
+                       robot.Duckboi.setPower(0.5);
+                   }
+               }
             }
         }
 
